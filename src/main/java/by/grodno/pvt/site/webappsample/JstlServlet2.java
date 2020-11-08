@@ -20,7 +20,7 @@ public class JstlServlet2 extends HttpServlet {
 			User user = new User(null, 
 					             req.getParameter("firstName"), 
 					             req.getParameter("lastName"),
-					             new SimpleDateFormat("yyy-MM-dd")
+					             new SimpleDateFormat("yyyy-MM-dd")
 					                 .parse(req.getParameter("birthdate")),
 					             Boolean.valueOf(req.getParameter("male")));
 			user.setSalary(Double.valueOf(req.getParameter("salary")));

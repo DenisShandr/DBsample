@@ -13,6 +13,9 @@ public class User {
 	private Integer department;
 	private Double salary;
 
+	public User() {
+	}
+
 	public User(Integer id, String firstMame, String lastName, Date birthdate, boolean male) {
 		super();
 		this.id = id;

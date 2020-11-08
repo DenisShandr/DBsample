@@ -17,7 +17,12 @@ public class DBUtils {
 		Connection connection = DriverManager.getConnection(dp.getString("url"), dp.getString("username"),
 				dp.getString("password"));
 
+
 		return connection;
 	}
+
+
+
+
 
 }

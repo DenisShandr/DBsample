@@ -34,9 +34,27 @@ public class UserService {
 		return userService;
 	}
 
+	public User getUser(Integer number){
+		User user = new User();
+		try (Connection conn = DBUtils.getConnetion();
+			 PreparedStatement stmt = conn.prepareStatement(SQL.SELECT_BY_ID)) {
+			 stmt.setInt(1, number);
+			 ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				user = mapRawToUser(rs);
+			}
+			rs.close();
+		} catch (Exception e) {
+			LOGGER.error("Something went wrong...", e);
+		}
+
+		return user;
+	}
+
 	public List<User> getUsers() {
 		List<User> result = new ArrayList<User>();
-		try (Connection conn = DBUtils.getConnetion(); Statement stmt = conn.createStatement()) {
+		try (Connection conn = DBUtils.getConnetion();
+			 Statement stmt = conn.createStatement()) {
 			ResultSet rs = stmt.executeQuery(SQL.SELECT_ALL);
 
 			while (rs.next()) {
@@ -104,4 +122,22 @@ public class UserService {
 		}
 	}
 
+	public void editUser(Integer number, String firstName, String lastName, String salary, Date birthdate, Boolean male) {
+		try (Connection conn = DBUtils.getConnetion();
+			 PreparedStatement stmt = conn.prepareStatement(SQL.UPDATE_BY_ID)) {
+
+			stmt.setString(1, firstName);
+			stmt.setString(2, lastName);
+			stmt.setDouble(3, Double.parseDouble(salary));
+			stmt.setTimestamp(4,
+					Timestamp.valueOf(new SimpleDateFormat("yyyy-MM-dd").format(birthdate)));
+			stmt.setBoolean(5, male);
+			stmt.setInt(6, 13);
+
+			stmt.executeUpdate(SQL.UPDATE_BY_ID);
+
+		} catch (Exception e) {
+			LOGGER.error("Something went wrong...", e);
+		}
+	}
 }

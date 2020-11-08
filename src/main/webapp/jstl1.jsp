@@ -48,9 +48,12 @@
 							<c:otherwise>Female</c:otherwise>
 						</c:choose></td>
 					<td>${requestScope.currUser.salary}</td>
-					<td><a class="btn btn-danger"
-						href="http://localhost/webappsample/user/delete?number=${i}">Delete
-							user</a></td>
+					<td><a class="btn btn-warning"
+						   href="http://localhost/webappsample/user/edit?number=${requestScope.currUser.id}">Edit
+					</a> <a>     </a>
+					<a class="btn btn-danger"
+						href="http://localhost/webappsample/user/delete?number=${requestScope.currUser.id}">Delete
+						</a></td>
 				</tr>
 
 			</c:forEach>
