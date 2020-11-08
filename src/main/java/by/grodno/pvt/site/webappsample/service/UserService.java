@@ -134,7 +134,7 @@ public class UserService {
 			stmt.setBoolean(5, male);
 			stmt.setInt(6, 13);
 
-			stmt.executeUpdate(SQL.UPDATE_BY_ID);
+			stmt.executeUpdate();
 
 		} catch (Exception e) {
 			LOGGER.error("Something went wrong...", e);
