@@ -132,7 +132,7 @@ public class UserService {
 			stmt.setTimestamp(4,
 					Timestamp.valueOf(new SimpleDateFormat("yyyy-MM-dd").format(birthdate)));
 			stmt.setBoolean(5, male);
-			stmt.setInt(6, 13);
+			stmt.setInt(6, number);
 
 			stmt.executeUpdate();
 
