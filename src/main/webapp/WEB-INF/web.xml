@@ -20,19 +20,7 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
-	<servlet>
-		<servlet-name>HelloServlet</servlet-name>
-		<servlet-class>by.grodno.pvt.site.webappsample.ServletSample</servlet-class>
-		<init-param>
-			<param-name>env</param-name>
-			<param-value>Development</param-value>
-		</init-param>
-	</servlet>
 
-	<servlet>
-		<servlet-name>HomeServlet</servlet-name>
-		<servlet-class>by.grodno.pvt.site.webappsample.HomePageServlet</servlet-class>
-	</servlet>
 	<servlet>
 		<servlet-name>Jstl1</servlet-name>
 		<servlet-class>by.grodno.pvt.site.webappsample.JstlServlet1</servlet-class>
@@ -49,14 +37,10 @@
 		<servlet-name>Jstl4</servlet-name>
 		<servlet-class>by.grodno.pvt.site.webappsample.JstlServlet4</servlet-class>
 	</servlet>
-	<servlet-mapping>
-		<servlet-name>HelloServlet</servlet-name>
-		<url-pattern>/hello</url-pattern>
-	</servlet-mapping>
 
 	<servlet-mapping>
 		<servlet-name>Jstl1</servlet-name>
-		<url-pattern>/jstl1</url-pattern>
+		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>Jstl2</servlet-name>
@@ -71,8 +55,5 @@
 		<url-pattern>/user/edit</url-pattern>
 	</servlet-mapping>
 
-	<servlet-mapping>
-		<servlet-name>HomeServlet</servlet-name>
-		<url-pattern>/test</url-pattern>
-	</servlet-mapping>
+
 </web-app>

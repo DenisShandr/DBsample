@@ -1,16 +1,12 @@
 package by.grodno.pvt.site.webappsample;
 
-import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import by.grodno.pvt.site.webappsample.service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import by.grodno.pvt.site.webappsample.service.User;
-import by.grodno.pvt.site.webappsample.service.UserService;
+import java.io.IOException;
 
 public class JstlServlet3 extends HttpServlet {
 
@@ -20,7 +16,7 @@ public class JstlServlet3 extends HttpServlet {
 
 		UserService.getService().deleteUser(Integer.valueOf(parameter));
 
-		resp.sendRedirect("/webappsample/jstl1");
+		resp.sendRedirect("/webappsample/");
 	}
 
 }

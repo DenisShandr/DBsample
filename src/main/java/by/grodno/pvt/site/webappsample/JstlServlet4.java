@@ -17,13 +17,10 @@ import static by.grodno.pvt.site.webappsample.service.UserService.LOGGER;
 public class JstlServlet4 extends HttpServlet {
 
 
-    private User user;
-    private String parameter;
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        parameter = req.getParameter("number");
-        user = UserService.getService().getUser(Integer.valueOf(parameter));
+        String parameter = req.getParameter("number");
+        User user = UserService.getService().getUser(Integer.valueOf(parameter));
 
 
         resp.sendRedirect("/webappsample/jstl4.jsp?firstName=" + user.getFirstName() + "&lastName=" + user.getLastName()
@@ -35,7 +32,7 @@ public class JstlServlet4 extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        parameter = req.getParameter("number");
+        String parameter = req.getParameter("number");
 
         User user = null;
         try {
@@ -51,7 +48,7 @@ public class JstlServlet4 extends HttpServlet {
         UserService.getService().editUser(user);
 
 
-        resp.sendRedirect("/webappsample/jstl1");
+        resp.sendRedirect("/webappsample/");
     }
 
 }
