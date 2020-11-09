@@ -9,4 +9,6 @@ public class SQL {
 			+ "(empl_name, empl_last_name, salary, birthdate,  male) VALUES (?,?,?,?,?)";
 	public static final String UPDATE_BY_ID = "update public.testTable  SET empl_name = ?,"
 			+ " empl_last_name = ?, salary = ?, birthdate = ?,  male = ? where id = ?";
+	public static final String TEST = "update public.testTable  SET empl_name = 'Helen'," +
+			" empl_last_name = 'Helen', salary = 12, birthdate = '1992-03-08',  male = false where id = 14";
 }

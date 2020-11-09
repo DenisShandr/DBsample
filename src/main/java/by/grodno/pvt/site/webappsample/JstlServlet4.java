@@ -8,52 +8,50 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
+import static by.grodno.pvt.site.webappsample.service.UserService.LOGGER;
+
 
 public class JstlServlet4 extends HttpServlet {
 
 
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String parameter = req.getParameter("id");
-        int id;
-        if (!(parameter == null)) {
-            id = Integer.valueOf(parameter);
-        } else {
-            id = 0;
-        }
-
-        try {
-            UserService.getService()
-                    .editUser(Integer.valueOf(id),
-                            req.getParameter("firstName"),
-                            req.getParameter("lastName"),
-                            req.getParameter("salary"),
-                            new SimpleDateFormat("yyyy-MM-dd")
-                                    .parse(req.getParameter("birthdate")),
-                            Boolean.valueOf(req.getParameter("male")));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        resp.sendRedirect("/webappsample/jstl1");
-    }
+    private User user;
+    private String parameter;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String parameter = req.getParameter("number");
-        User user = UserService.getService().getUser(Integer.parseInt(parameter));
-        req.setAttribute("id", user.getId());
-        req.setAttribute("firstName", user.getFirstName());
-        req.setAttribute("lastName", user.getLastName());
-        req.setAttribute("salary", user.getSalary());
-        req.setAttribute("birthday", new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS")
-                .format(user.getBirthdate()));
-        req.setAttribute("male", user.isMale());
-        getServletContext().getRequestDispatcher("/jstl4.jsp").forward(req, resp);
+        parameter = req.getParameter("number");
+        user = UserService.getService().getUser(Integer.valueOf(parameter));
 
+
+        resp.sendRedirect("/webappsample/jstl4.jsp?firstName=" + user.getFirstName() + "&lastName=" + user.getLastName()
+                + "&birthdate=" + new SimpleDateFormat("yyyy-MM-dd").format(user.getBirthdate()) + "&male=" + user.isMale() + "&salary=" + user.getSalary()
+                + "&number=" + user.getId());
+
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        parameter = req.getParameter("number");
+
+        User user = null;
+        try {
+            user = new User(Integer.valueOf(parameter),
+                    req.getParameter("firstName"),
+                    req.getParameter("lastName"),
+                    new SimpleDateFormat("yyy-MM-dd").parse(req.getParameter("birthdate")),
+                    Boolean.valueOf(req.getParameter("male")));
+        } catch (ParseException e) {
+            LOGGER.error("Something went wrong...", e);
+        }
+        user.setSalary(Double.valueOf(req.getParameter("salary")));
+        UserService.getService().editUser(user);
+
+
+        resp.sendRedirect("/webappsample/jstl1");
     }
 
 }

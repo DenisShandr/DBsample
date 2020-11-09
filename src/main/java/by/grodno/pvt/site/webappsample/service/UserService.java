@@ -1,22 +1,12 @@
 package by.grodno.pvt.site.webappsample.service;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Timestamp;
-import java.text.ParseException;
+import org.apache.log4j.Logger;
+
+import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import javax.swing.text.StyledEditorKit.BoldAction;
-
-import org.apache.log4j.Logger;
-
-import by.grodno.pvt.site.webappsample.filter.LoggingFilter;
 
 public class UserService {
 
@@ -47,7 +37,6 @@ public class UserService {
 		} catch (Exception e) {
 			LOGGER.error("Something went wrong...", e);
 		}
-
 		return user;
 	}
 
@@ -122,22 +111,23 @@ public class UserService {
 		}
 	}
 
-	public void editUser(Integer number, String firstName, String lastName, String salary, Date birthdate, Boolean male) {
+	public void editUser(User user) {
 		try (Connection conn = DBUtils.getConnetion();
 			 PreparedStatement stmt = conn.prepareStatement(SQL.UPDATE_BY_ID)) {
-
-			stmt.setString(1, firstName);
-			stmt.setString(2, lastName);
-			stmt.setDouble(3, Double.parseDouble(salary));
+			stmt.setString(1, user.getFirstName());
+			stmt.setString(2, user.getLastName());
+			stmt.setDouble(3, user.getSalary());
 			stmt.setTimestamp(4,
-					Timestamp.valueOf(new SimpleDateFormat("yyyy-MM-dd").format(birthdate)));
-			stmt.setBoolean(5, male);
-			stmt.setInt(6, number);
+					Timestamp.valueOf(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS")
+							 .format(user.getBirthdate())));
+			stmt.setBoolean(5, user.isMale());
+			stmt.setInt(6, user.getId());
 
 			stmt.executeUpdate();
 
 		} catch (Exception e) {
 			LOGGER.error("Something went wrong...", e);
 		}
+
 	}
 }
