@@ -24,7 +24,8 @@ public class JstlServlet4 extends HttpServlet {
 
 
         resp.sendRedirect("/webappsample/jstl4.jsp?firstName=" + user.getFirstName() + "&lastName=" + user.getLastName()
-                + "&birthdate=" + new SimpleDateFormat("yyyy-MM-dd").format(user.getBirthdate()) + "&male=" + user.isMale() + "&salary=" + user.getSalary()
+                + "&birthdate=" + new SimpleDateFormat("yyyy-MM-dd").format(user.getBirthdate())
+                + "&male=" + user.isMale() + "&salary=" + user.getSalary()
                 + "&number=" + user.getId());
 
 

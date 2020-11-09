@@ -1,16 +1,14 @@
 package by.grodno.pvt.site.webappsample;
 
-import java.io.IOException;
-import java.security.KeyStore.Entry.Attribute;
-import java.util.List;
+import by.grodno.pvt.site.webappsample.service.User;
+import by.grodno.pvt.site.webappsample.service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import by.grodno.pvt.site.webappsample.service.User;
-import by.grodno.pvt.site.webappsample.service.UserService;
+import java.io.IOException;
+import java.util.List;
 
 public class JstlServlet1 extends HttpServlet {
 
