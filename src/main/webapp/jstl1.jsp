@@ -24,6 +24,7 @@
 					<th scope="col">Lastname</th>
 					<th scope="col">Birthdate</th>
 					<th scope="col">Sex</th>
+					<th scope="col">Department</th>
 					<th scope="col">Salary</th>
 					<th scope="col">Actions</th>
 				</tr>
@@ -47,6 +48,7 @@
 							<c:when test="${requestScope.currUser.male}">Male</c:when>
 							<c:otherwise>Female</c:otherwise>
 						</c:choose></td>
+					<td>${requestScope.currUser.departmentName}</td>
 					<td>${requestScope.currUser.salary}</td>
 					<td><a class="btn btn-warning"
 						   href="http://localhost/webappsample/user/edit?number=${requestScope.currUser.id}">Edit
@@ -61,8 +63,10 @@
 	</c:if>
 
 	<a class="btn btn-primary"
-		href="http://localhost/webappsample/jstl2.jsp">Add user</a>
-
+		href="http://localhost/webappsample/user">Add user</a>
+	<a>     </a>
+	<a class="btn btn-primary"
+	   href="http://localhost/webappsample/dept">View departments</a>
 	<br />
 	<br />
 

@@ -44,20 +44,15 @@ public class UserService {
 		List<User> result = new ArrayList<User>();
 		try (Connection conn = DBUtils.getConnetion();
 			 Statement stmt = conn.createStatement()) {
-			ResultSet rs = stmt.executeQuery(SQL.SELECT_ALL);
-
+			ResultSet rs = stmt.executeQuery(SQL.SELECT_ALL_USERS);
 			while (rs.next()) {
-
-				User user = mapRawToUser(rs);
-
+				User user = mapRawToUserJoin(rs);
 				result.add(user);
 			}
-
 			rs.close();
 		} catch (Exception e) {
 			LOGGER.error("Something went wrong...", e);
 		}
-
 		return result;
 	}
 
@@ -69,24 +64,34 @@ public class UserService {
 		Double sal = rs.getDouble(4);
 		Date date = rs.getTimestamp(5);
 		Boolean male = rs.getBoolean(7);
-		User user = new User(id, fName, lName, date, male);
+		User user = new User(id, fName, lName, date, male, dept);
 		user.setSalary(sal);
-		user.setDepartment(dept);
 		return user;
 	};
+
+	private User mapRawToUserJoin (ResultSet rs) throws SQLException {
+		Integer id = rs.getInt(1);
+		String fName = rs.getString(2);
+		String lName = rs.getString(3);
+		String dept = rs.getString(6);
+		Double sal = rs.getDouble(7);
+		Date date = rs.getTimestamp(4);
+		Boolean male = rs.getBoolean(5);
+		User user = new User(id, fName, lName, date, male, dept);
+		user.setSalary(sal);
+		return user;
+	};
+
+
 
 	public void deleteUser(Integer number) {
 		try (Connection conn = DBUtils.getConnetion();
 				PreparedStatement stmt = conn.prepareStatement(SQL.DELETE_BY_ID)) {
-
 			stmt.setInt(1, number);
-
 			stmt.execute();
-
 		} catch (Exception e) {
 			LOGGER.error("Something went wrong...", e);
 		}
-
 	};
 
 	public void addUser(User user) {
@@ -99,13 +104,10 @@ public class UserService {
 			stmt.setTimestamp(4,
 					Timestamp.valueOf(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS").format(user.getBirthdate())));
 			stmt.setBoolean(5, user.isMale());
-
 			stmt.executeUpdate();
-
 			ResultSet generatedKeys = stmt.getGeneratedKeys();
 			generatedKeys.next();
 			LOGGER.info("User created with id: " + generatedKeys.getLong(1));
-
 		} catch (Exception e) {
 			LOGGER.error("Something went wrong...", e);
 		}
@@ -121,10 +123,9 @@ public class UserService {
 					Timestamp.valueOf(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS")
 							 .format(user.getBirthdate())));
 			stmt.setBoolean(5, user.isMale());
-			stmt.setInt(6, user.getId());
-
+			stmt.setDouble(6, user.getDepartment());
+			stmt.setInt(7, user.getId());
 			stmt.executeUpdate();
-
 		} catch (Exception e) {
 			LOGGER.error("Something went wrong...", e);
 		}

@@ -37,6 +37,22 @@
 		<servlet-name>Jstl4</servlet-name>
 		<servlet-class>by.grodno.pvt.site.webappsample.JstlServlet4</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>Jstl5</servlet-name>
+		<servlet-class>by.grodno.pvt.site.webappsample.JstlServlet5</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>Jstl6</servlet-name>
+		<servlet-class>by.grodno.pvt.site.webappsample.JstlServlet6</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>Jstl7</servlet-name>
+		<servlet-class>by.grodno.pvt.site.webappsample.JstlServlet7</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>Jstl8</servlet-name>
+		<servlet-class>by.grodno.pvt.site.webappsample.JstlServlet8</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>Jstl1</servlet-name>
@@ -54,6 +70,21 @@
 		<servlet-name>Jstl4</servlet-name>
 		<url-pattern>/user/edit</url-pattern>
 	</servlet-mapping>
-
+	<servlet-mapping>
+		<servlet-name>Jstl5</servlet-name>
+		<url-pattern>/dept</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Jstl6</servlet-name>
+		<url-pattern>/dept/add</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Jstl7</servlet-name>
+		<url-pattern>/dept/delete</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Jstl8</servlet-name>
+		<url-pattern>/dept/edit</url-pattern>
+	</servlet-mapping>
 
 </web-app>
